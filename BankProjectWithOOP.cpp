@@ -465,32 +465,41 @@ public:
 class clsLoginScreen : protected clsScreen
 {
 private:
+
     static void _Login()
     {
-        bool LoginFailed = false;
+        bool LoginFailed = true;
         string UserName, Password;
+        short TryCount = 3;
+
         do
         {
-
-            if (LoginFailed)
-            {
-                cout << "\nInvilde UserName/Password\n\n";
-
-            }
-
-            cout << "Please enter user Name ?";
+            cout << "Please enter user Name: ";
             cin >> UserName;
 
-            cout << "Please enter Password ?";
+            cout << "Please enter Password: ";
             cin >> Password;
+
             CurrentUser = clsUser::Find(UserName, Password);
             LoginFailed = CurrentUser.IsEmpty();
 
-        } while (LoginFailed);
-        clsMainScreen::ShowMainMenue();
-        //clsLoginScreen::ShowLoginScreen();
+            if (LoginFailed)
+            {
+                TryCount--;
+                cout << "\nInvalid UserName/Password\n";
 
+                if (TryCount > 0)
+                    cout << "You have " << TryCount << " tries left.\n\n";
+            }
+
+        } while (TryCount > 0 && LoginFailed);
+
+        if (!LoginFailed)
+            clsMainScreen::ShowMainMenue();
+        else
+            cout << "You are locked after 3 failed trials\n";
     }
+
 public:
     static void ShowLoginScreen()
     {
