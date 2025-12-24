@@ -4,6 +4,7 @@
 #include "E://learnc++/Library/LibraryForCourse11/clsUser.h.h" ;
 #include "Global.h" ;
 #include "iomanip"
+#include "E://learnc++/Library/LibraryForCourse10/MyClsDate.h" ;
 class clsScreen
 {
 protected:
@@ -16,6 +17,9 @@ protected:
             cout << "\n\t\t\t\t\t  " << SubTitle;
         }
         cout << "\n\t\t\t\t\t______________________________________\n\n";
+        cout << "\n\t\t\t\t\t"<<"Date : " << CurrentUser.UserName << "\n";
+        cout << "\t\t\t\t\t" <<"User : " << clsDate::DateToString(clsDate()) << "\n\n";
+
     }
 
 
@@ -36,5 +40,8 @@ protected:
         }
 
     }
+
+    
+   
 
 };
